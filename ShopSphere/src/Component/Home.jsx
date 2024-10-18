@@ -46,7 +46,7 @@ const Home = () => {
 
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src={image1} alt="Los Angeles" class="d-block w-100" />
+            <img src={image1} alt="Los Angeles" class="d-block w-100" style={{ height: '500px', objectFit: 'cover' }} />
           </div>
           <div class="carousel-item">
             <img src={image2} alt="Chicago" class="d-block w-100" />
@@ -93,10 +93,42 @@ const Home = () => {
             </div>
           ))}
         </div>
+        {add ?(
+          <ViewProduct
+          currentProduct={currentProduct}
+          />
+        ):console.log('view product   ')}
       </div>
       <Footer/>
+
     </>
   );
 };
+
+const ViewProduct=(currentproducts)=>{
+  const [product,setProduct]=useState(currentproducts)
+  document.getElementById('a1').style.display='none'
+  return(
+    <>
+    <div className="container">
+      <div className="row g-4">
+        <div className="col-lg-6 d-flex justify-content-center">
+          <img src={product.currentProduct.image} alt="" className="img-fluid col-lg-12 w-75"/>
+        </div>
+        <div className="desc col-lg-6">
+          <h2>{product.currentProduct.p_name}</h2>
+          <p>{product.currentProduct.description}</p>
+          {/*console.log(product.currentProduct)*/}
+          <p>${product.currentProduct.price}</p>
+          <div className="row">
+            <button className="btn btn-warning col-lg-10">Add to cart</button>
+            <button className="btn btn-success col-lg-10 mt-1">Buy now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </>
+  )
+}
 
 export default Home;
